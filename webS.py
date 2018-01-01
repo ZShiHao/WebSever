@@ -3,17 +3,16 @@ from socket import *
 
 severport=12000
 
-#创建欢迎套接字
-severSocket=socket(AF_INET,SOCK_STREAM)
-severSocket.bind(('192.168.123.226',severport))
+severSocket=socket(AF_INET,SOCK_STREAM)#Creat a welcome socket to receive any TCP connection request.
+severSocket.bind(('',severport))#Binding your IP address with you program port.
 
-severSocket.listen(1)#聆听是否有TCP连接请求
+severSocket.listen(1)#Listening if there is a TCP connection requestcoming.
 
 while True:
 	try:
-		connectionSocket,addr=severSocket.accept()#创建连接套接字，完成三次握手
+		connectionSocket,addr=severSocket.accept()#Accept TCP connection and creat an exclusive socket for this TCP connection.
 		print('A TCP connection is already built with client:{}'.format(addr[0]))
-		messageB=connectionSocket.recv(1024)#接收通过TCP发来的报文
+		messageB=connectionSocket.recv(1024)#Accept TCP message(binarystream) from socket.
 		message=messageB.decode()
 		print('The request HTTP message is:')
 		print(message)
